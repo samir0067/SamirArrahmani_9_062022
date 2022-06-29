@@ -2,10 +2,10 @@ import VerticalLayout from './VerticalLayout.js'
 import ErrorPage from "./ErrorPage.js"
 import LoadingPage from "./LoadingPage.js"
 import BigBilledIcon from '../assets/svg/big_billed.js'
-import { filteredBills } from '../containers/Dashboard.js'
+import {filteredBills} from '../containers/Dashboard.js'
 import ArrowIcon from '../assets/svg/arrow.js'
 
-export default ({ data, loading, error }) => {
+export default ({data, loading, error}) => {
 
   if (loading) {
     return LoadingPage()
