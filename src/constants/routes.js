@@ -6,22 +6,22 @@ import DashboardUI from "../views/DashboardUI.js"
 export const ROUTES_PATH = {
   Login: '/',
   Bills: '#employee/bills',
-  NewBill : '#employee/bill/new',
+  NewBill: '#employee/bill/new',
   Dashboard: '#admin/dashboard'
 }
 
-export const ROUTES = ({ pathname, data, error, loading }) => {
+export const ROUTES = ({pathname, data, error, loading}) => {
   switch (pathname) {
     case ROUTES_PATH['Login']:
-      return LoginUI({ data, error, loading })
+      return LoginUI({data, error, loading})
     case ROUTES_PATH['Bills']:
-      return BillsUI({ data, error, loading })
+      return BillsUI({data, error, loading})
     case ROUTES_PATH['NewBill']:
       return NewBillUI()
     case ROUTES_PATH['Dashboard']:
-      return DashboardUI({ data, error, loading })
+      return DashboardUI({data, error, loading})
     default:
-      return LoginUI({ data, error, loading })
+      return LoginUI({data, error, loading})
   }
 }
 
