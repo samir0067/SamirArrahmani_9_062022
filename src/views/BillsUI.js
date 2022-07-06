@@ -21,9 +21,11 @@ const row = (bill) => {
 
 const rows = (data) => {
   if (data && data.length) {
-    data.sort((a, b) => b.date.localeCompare(a.date))
-    console.log('data after=> ', data)
-    return data.map(bill => row(bill)).join("")
+    console.log("data ==>", data)
+    return data
+      .sort((a, b) => (a.date < b.date) ? 1 : -1)
+      .map((bill) => row(bill))
+      .join("")
   } else {
     return ""
   }
