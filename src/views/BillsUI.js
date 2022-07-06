@@ -19,6 +19,7 @@ const row = (bill) => {
     `)
 }
 
+// trie de la date par ordre décroissant
 const rows = (data) => {
   if (data && data.length) {
     console.log("data ==>", data)
