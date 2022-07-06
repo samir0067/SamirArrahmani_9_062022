@@ -34,7 +34,7 @@ export default class {
         .bills()
         .list()
         .then(snapshot => {
-          const bills = snapshot
+          return snapshot
             .map(doc => {
               try {
                 return {
@@ -53,7 +53,6 @@ export default class {
                 }
               }
             })
-          return bills
         })
     }
   }
