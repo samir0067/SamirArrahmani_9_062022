@@ -1,14 +1,14 @@
-import WindowIcon from "../assets/svg/window.js"
-import MailIcon from "../assets/svg/mail.js"
-import DisconnectIcon from "../assets/svg/disconnect.js"
+import WindowIcon from "../assets/svg/window.js";
+import MailIcon from "../assets/svg/mail.js";
+import DisconnectIcon from "../assets/svg/disconnect.js";
 
 export default (height) => {
-  let user
-  user = JSON.parse(localStorage.getItem('user'))
-  if (typeof user === 'string') {
-    user = JSON.parse(user)
+  let user;
+  user = JSON.parse(localStorage.getItem("user"));
+  if (typeof user === "string") {
+    user = JSON.parse(user);
   }
-  if (user && user.type === 'Employee') {
+  if (user && user.type === "Employee") {
     return (
       `
         <div class='vertical-navbar' style='height: ${height}vh;'>
@@ -24,7 +24,7 @@ export default (height) => {
           </div>
       </div>
         `
-    )
+    );
   } else {
     return (
       `
@@ -35,6 +35,6 @@ export default (height) => {
             </div>
           </div>
         `
-    )
+    );
   }
 }

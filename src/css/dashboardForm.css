@@ -1,5 +1,5 @@
 
-.dashboard-form label{
+.dashboard-form label {
   margin-top: 20px;
 }
 
@@ -17,12 +17,12 @@
   border-radius: 5px;
 }
 
-.input-flex{
-  display:flex;
+.input-flex {
+  display: flex;
   justify-content: space-between;
 }
 
-.textarea-field{
+.textarea-field {
   background: #f9f9f9;
   border-radius: 5px;
   font-style: normal;
@@ -66,7 +66,7 @@
   max-width: 300px !important;
 }
 
-.buttons-flex button{
+.buttons-flex button {
   width: 100px !important;
   background-color: #0D5AE5;
 }

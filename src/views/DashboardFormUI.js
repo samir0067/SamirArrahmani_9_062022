@@ -1,8 +1,8 @@
-import calendarIcon from '../assets/svg/calendar.js'
-import euroIcon from '../assets/svg/euro.js'
-import pctIcon from '../assets/svg/pct.js'
-import eyeWhite from '../assets/svg/eye_white.js'
-import {formatDate} from '../app/format.js'
+import calendarIcon from "../assets/svg/calendar.js";
+import euroIcon from "../assets/svg/euro.js";
+import pctIcon from "../assets/svg/pct.js";
+import eyeWhite from "../assets/svg/eye_white.js";
+import {formatDate} from "../app/format.js";
 
 export const modal = () => (`
   <div class="modal fade" id="modaleFileAdmin1" data-testid="modaleFileAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -19,7 +19,7 @@ export const modal = () => (`
       </div>
     </div>
   </div>
-  `)
+  `);
 
 export default (bill) => {
 
@@ -76,7 +76,7 @@ export default (bill) => {
         </div>
       </div>
       <div class="row">
-       ${bill.status === 'pending' ? (`
+       ${bill.status === "pending" ? (`
         <div class="col-sm">
           <label for="commentary-admin" class="bold-label">Ajouter un commentaire</label>
           <textarea id="commentary2" class="form-control blue-border" data-testid="commentary2" rows="5"></textarea>
@@ -89,14 +89,14 @@ export default (bill) => {
        `)}
       </div>
       <div class="row">
-      ${bill.status === 'pending' ? (`
+      ${bill.status === "pending" ? (`
       <div class="col-sm buttons-flex" style="width: 300px;" >
         <button type="submit" id='btn-refuse-bill' data-testid='btn-refuse-bill-d' class="btn btn-primary">Refuser</button>
         <button type="submit" id='btn-accept-bill' data-testid='btn-accept-bill-d' class="btn btn-primary">Accepter</button>
       </div>
-      `) : ''}
+      `) : ""}
     </div>
     ${modal()}
     </div>
-  `)
+  `);
 }

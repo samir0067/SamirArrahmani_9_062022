@@ -2,9 +2,9 @@
  * @jest-environment jsdom
  */
 
-import { screen } from "@testing-library/dom"
-import DashboardFormUI from "../views/DashboardFormUI.js"
-import { formatDate } from "../app/format.js"
+import {screen} from "@testing-library/dom";
+import DashboardFormUI from "../views/DashboardFormUI.js";
+import {formatDate} from "../app/format.js";
 
 const bill = {
   "id": "47qAXb6fIm2zOKkLzMro",
@@ -20,60 +20,60 @@ const bill = {
   "amount": 400,
   "email": "a@a",
   "pct": 20
-}
+};
 
 const billAccepted = {
   ...bill,
   "status": "accepted"
-}
+};
 
 const billPending = {
   ...bill,
   "status": "pending"
-}
+};
 
 const billrefused = {
   ...bill,
   "status": "refused"
-}
+};
 
-describe('Given I am connected as an Admin and I am on Dashboard Page', () => {
-  describe('When bill data is passed to DashboardUI', () => {
-    test(('Then, it should them in the page'), () => {
-      const html = DashboardFormUI(bill)
-      document.body.innerHTML = html
-      expect(screen.getByText(bill.vat)).toBeTruthy()
-      expect(screen.getByText(bill.type)).toBeTruthy()
-      expect(screen.getByText(bill.commentary)).toBeTruthy()
-      expect(screen.getByText(bill.name)).toBeTruthy()
-      expect(screen.getByText(bill.fileName)).toBeTruthy()
-      expect(screen.getByText(formatDate(bill.date))).toBeTruthy()
-      expect(screen.getByText(bill.amount.toString())).toBeTruthy()
-      expect(screen.getByText(bill.pct.toString())).toBeTruthy()
-    })
-  })
-  describe('When pending bill is passed to DashboardUI', () => {
-    test(('Then, it should show button and textArea'), () => {
-      const html = DashboardFormUI(billPending)
-      document.body.innerHTML = html
-      expect(screen.getByText("Accepter")).toBeTruthy()
-      expect(screen.getByText("Refuser")).toBeTruthy()
-      expect(screen.getByTestId("commentary2")).toBeTruthy()
-    })
-  })
-  describe('When accepted bill is passed to DashboardUI', () => {
-    test(('Then, it should show admin commentary'), () => {
-      const html = DashboardFormUI(billAccepted)
-      document.body.innerHTML = html
-      expect(screen.getByText(bill.commentAdmin)).toBeTruthy()
-    })
-  })
-  describe('When refused bill is passed to DashboardUI', () => {
-    test(('Then, it should show admin commentary'), () => {
-      const html = DashboardFormUI(billrefused)
-      document.body.innerHTML = html
-      expect(screen.getByText(bill.commentAdmin)).toBeTruthy()
-    })
-  })
-})
+describe("Given I am connected as an Admin and I am on Dashboard Page", () => {
+  describe("When bill data is passed to DashboardUI", () => {
+    test(("Then, it should them in the page"), () => {
+      const html = DashboardFormUI(bill);
+      document.body.innerHTML = html;
+      expect(screen.getByText(bill.vat)).toBeTruthy();
+      expect(screen.getByText(bill.type)).toBeTruthy();
+      expect(screen.getByText(bill.commentary)).toBeTruthy();
+      expect(screen.getByText(bill.name)).toBeTruthy();
+      expect(screen.getByText(bill.fileName)).toBeTruthy();
+      expect(screen.getByText(formatDate(bill.date))).toBeTruthy();
+      expect(screen.getByText(bill.amount.toString())).toBeTruthy();
+      expect(screen.getByText(bill.pct.toString())).toBeTruthy();
+    });
+  });
+  describe("When pending bill is passed to DashboardUI", () => {
+    test(("Then, it should show button and textArea"), () => {
+      const html = DashboardFormUI(billPending);
+      document.body.innerHTML = html;
+      expect(screen.getByText("Accepter")).toBeTruthy();
+      expect(screen.getByText("Refuser")).toBeTruthy();
+      expect(screen.getByTestId("commentary2")).toBeTruthy();
+    });
+  });
+  describe("When accepted bill is passed to DashboardUI", () => {
+    test(("Then, it should show admin commentary"), () => {
+      const html = DashboardFormUI(billAccepted);
+      document.body.innerHTML = html;
+      expect(screen.getByText(bill.commentAdmin)).toBeTruthy();
+    });
+  });
+  describe("When refused bill is passed to DashboardUI", () => {
+    test(("Then, it should show admin commentary"), () => {
+      const html = DashboardFormUI(billrefused);
+      document.body.innerHTML = html;
+      expect(screen.getByText(bill.commentAdmin)).toBeTruthy();
+    });
+  });
+});
 
