@@ -85,7 +85,10 @@ export default class {
     if (typeof $('#modaleFileAdmin1').modal === 'function') $('#modaleFileAdmin1').modal('show')
   }
 
+  // utilisation de la methode Event.stopImmediatePropagation(): empêche les gestionnaires d'évènement,
+  // associés à ce même évènement, d'être appelés.
   handleEditTicket(e, bill, bills) {
+    e.stopImmediatePropagation()
     if (this.counter === undefined || this.id !== bill.id) this.counter = 0
     if (this.id === undefined || this.id !== bill.id) this.id = bill.id
     if (this.counter % 2 === 0) {
@@ -130,7 +133,10 @@ export default class {
     this.onNavigate(ROUTES_PATH['Dashboard'])
   }
 
+  // utilisation de la methode Event.stopImmediatePropagation(): empêche les gestionnaires d'évènement,
+  // associés à ce même évènement, d'être appelés.
   handleShowTickets(e, bills, index) {
+    e.stopImmediatePropagation()
     if (this.counter === undefined || this.index !== index) this.counter = 0
     if (this.index === undefined || this.index !== index) this.index = index
     if (this.counter % 2 === 0) {
@@ -159,14 +165,13 @@ export default class {
         .bills()
         .list()
         .then(snapshot => {
-          const bills = snapshot
+          return snapshot
             .map(doc => ({
               id: doc.id,
               ...doc,
               date: doc.date,
               status: doc.status
             }))
-          return bills
         })
         .catch(error => {
           throw error
