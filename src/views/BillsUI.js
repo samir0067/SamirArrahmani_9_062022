@@ -22,7 +22,6 @@ const row = (bill) => {
 // trie de la date par ordre décroissant
 const rows = (data) => {
   if (data && data.length) {
-    console.log("data ==>", data);
     return data
       .sort((a, b) => (a.date < b.date) ? 1 : -1)
       .map((bill) => row(bill))

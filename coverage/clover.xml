@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1657115757302" clover="3.2.0">
-  <project timestamp="1657115757302" name="All files">
-    <metrics statements="232" coveredstatements="161" conditionals="96" coveredconditionals="73" methods="69" coveredmethods="44" elements="397" coveredelements="278" complexity="0" loc="232" ncloc="232" packages="3" files="16" classes="16"/>
+<coverage generated="1658051053829" clover="3.2.0">
+  <project timestamp="1658051053829" name="All files">
+    <metrics statements="231" coveredstatements="160" conditionals="96" coveredconditionals="73" methods="69" coveredmethods="44" elements="396" coveredelements="277" complexity="0" loc="231" ncloc="231" packages="3" files="16" classes="16"/>
     <package name="constants">
       <metrics statements="8" coveredstatements="8" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="1"/>
       <file name="routes.js" path="C:\Users\arrah\Openclassrooms\P9_arrahmani_samir\Billed-app-FR-Front\src\constants\routes.js">
@@ -229,28 +229,27 @@
       </file>
     </package>
     <package name="views">
-      <metrics statements="33" coveredstatements="33" conditionals="32" coveredconditionals="32" methods="15" coveredmethods="15"/>
+      <metrics statements="32" coveredstatements="32" conditionals="32" coveredconditionals="32" methods="15" coveredmethods="15"/>
       <file name="Actions.js" path="C:\Users\arrah\Openclassrooms\P9_arrahmani_samir\Billed-app-FR-Front\src\views\Actions.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="6" type="stmt"/>
       </file>
       <file name="BillsUI.js" path="C:\Users\arrah\Openclassrooms\P9_arrahmani_samir\Billed-app-FR-Front\src\views\BillsUI.js">
-        <metrics statements="15" coveredstatements="15" conditionals="10" coveredconditionals="10" methods="6" coveredmethods="6"/>
+        <metrics statements="14" coveredstatements="14" conditionals="10" coveredconditionals="10" methods="6" coveredmethods="6"/>
         <line num="7" count="5" type="stmt"/>
         <line num="8" count="4" type="stmt"/>
         <line num="23" count="5" type="stmt"/>
         <line num="24" count="4" type="cond" truecount="4" falsecount="0"/>
         <line num="25" count="1" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="27" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="28" count="4" type="stmt"/>
-        <line num="31" count="3" type="stmt"/>
-        <line num="37" count="6" type="stmt"/>
-        <line num="54" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="55" count="1" type="stmt"/>
-        <line num="56" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="57" count="1" type="stmt"/>
-        <line num="60" count="4" type="stmt"/>
+        <line num="26" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="36" count="6" type="stmt"/>
+        <line num="53" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="55" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="59" count="4" type="stmt"/>
       </file>
       <file name="DashboardFormUI.js" path="C:\Users\arrah\Openclassrooms\P9_arrahmani_samir\Billed-app-FR-Front\src\views\DashboardFormUI.js">
         <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
