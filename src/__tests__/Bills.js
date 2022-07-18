@@ -12,11 +12,11 @@ import Bills from "../containers/Bills";
 import userEvent from "@testing-library/user-event";
 
 describe("Given I am connected as an employee", () => {
+  // window.localStorage permet d'accéder aux données stockées des sessions du navigateur sans date d'expiration.
+  Object.defineProperty(window, "localStorage", {value: localStorageMock});
+  window.localStorage.setItem("user", JSON.stringify({type: "Employee"}));
   describe("When I am on Bills Page", () => {
     test("Then bill icon in vertical layout should be highlighted", async() => {
-
-      Object.defineProperty(window, "localStorage", {value: localStorageMock});
-      window.localStorage.setItem("user", JSON.stringify({type: "Employee"}));
       const root = document.createElement("div");
       root.setAttribute("id", "root");
       document.body.append(root);
@@ -35,37 +35,45 @@ describe("Given I am connected as an employee", () => {
       const datesSorted = [...dates].sort(antiChrono);
       expect(dates).toEqual(datesSorted);
     });
-  });
 
-  describe("When I click on the icon button eye", () => {
-    test(("then a modal should open"), () => {
-      // window.localStorage permet d'accéder aux données stockées des sessions du navigateur sans date d'expiration.
-      Object.defineProperty(window, "localStorage", {value: localStorageMock});
-      window.localStorage.setItem("user", JSON.stringify({type: "Employee"}));
+    test(("Then I click on the 'New Bill' button, I am redirected to the 'New Bill' page."), () => {
       document.body.innerHTML = BillsUI({data: bills});
-
       const onNavigate = (pathname) => {
         document.body.innerHTML = ROUTES({pathname});
       };
       const billImpl = new Bills({
-        document,
-        onNavigate,
-        firestore: null,
-        localStorage: window.localStorage
+        document, onNavigate, store: null, localStorage: window.localStorage
       });
-      // Crée une fonction mock optionnelle, prend une implémentation mocked
-      $.fn.modal = jest.fn();
 
-      // récupérer le premier élément icon-eye par l'attribut data-testid
-      const eye = screen.getAllByTestId("icon-eye")[0];
-      const handleClickEye = jest.fn(() => billImpl.handleClickIconEye(eye));
-      eye.addEventListener("click", handleClickEye);
+      // récupérer l'élément "btn-new-bill" par l'attribut "data-testid"
+      const btnNewBill = screen.getByTestId("btn-new-bill");
+      const handleBtnNewBill = jest.fn(() => billImpl.handleClickNewBill());
+      btnNewBill.addEventListener("click", handleBtnNewBill);
+      userEvent.click(btnNewBill);
+      // s'assurer que la fonction bien "handleBtnNewBill" était handleClickEye a été appelée
+      expect(handleBtnNewBill).toHaveBeenCalled();
+      // s'attendre à ce que le text "Envoyer une note de frais" soit vraie
+      expect(screen.getByText("Envoyer une note de frais")).toBeTruthy();
+    });
+
+    test(("Then I click on the eye icon button, a modal should open"), () => {
+      document.body.innerHTML = BillsUI({data: bills});
+      const billImpl = new Bills({
+        document, onNavigate, store: null, localStorage: window.localStorage
+      });
+
+      // récupérer le premier élément "icon-eye" par l'attribut "data-testid"
+      const iconEye = screen.getAllByTestId("icon-eye")[0];
+      const handleIconEye = jest.fn(() => billImpl.handleClickIconEye(iconEye));
+      iconEye.addEventListener("click", handleIconEye);
       // simulation des interactions du navigateur
-      userEvent.click(eye);
+      userEvent.click(iconEye);
 
-      // s'assurer que la fonction bien était handleClickEye a été appelée
-      expect(handleClickEye).toHaveBeenCalled();
+      // s'assurer que la fonction "handleIconEye" bien était "handleIconEye" a été appelée
+      expect(handleIconEye).toHaveBeenCalled();
+      // s'attendre à ce que la classe avec l'id modaleFile soit vraie
       expect(document.getElementById("modaleFile")).toBeTruthy();
     });
+
   });
 });
