@@ -56,8 +56,8 @@ describe("Given I am connected as an employee", () => {
       // Crée une fonction mock optionnelle, prend une implémentation mocked
       $.fn.modal = jest.fn();
 
-      // récupérer les testId par l'attribut data-testid
-      const eye = screen.getAllByTestId("icon-eye").pop();
+      // récupérer le premier élément icon-eye par l'attribut data-testid
+      const eye = screen.getAllByTestId("icon-eye")[0];
       const handleClickEye = jest.fn(() => billImpl.handleClickIconEye(eye));
       eye.addEventListener("click", handleClickEye);
       // simulation des interactions du navigateur
