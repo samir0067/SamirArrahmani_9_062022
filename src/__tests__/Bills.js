@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-
 import {screen, waitFor} from "@testing-library/dom";
 import BillsUI from "../views/BillsUI.js";
 import {bills} from "../fixtures/bills.js";
@@ -10,11 +9,17 @@ import {localStorageMock} from "../__mocks__/localStorage.js";
 import router from "../app/Router.js";
 import Bills from "../containers/Bills";
 import userEvent from "@testing-library/user-event";
+import mockStore from "../__mocks__/store.js";
 
 describe("Given I am connected as an employee", () => {
-  // window.localStorage permet d'accéder aux données stockées des sessions du navigateur sans date d'expiration.
-  Object.defineProperty(window, "localStorage", {value: localStorageMock});
-  window.localStorage.setItem("user", JSON.stringify({type: "Employee"}));
+
+  beforeEach(() => {
+    // beforeEach() est exécuté avant chaque test describe avec window.localStorage qui permet d'accéder aux données
+    // stockées des sessions du navigateur sans date d'expiration.
+    Object.defineProperty(window, "localStorage", {value: localStorageMock});
+    window.localStorage.setItem("user", JSON.stringify({type: "Employee"}));
+  });
+
   describe("When I am on Bills Page", () => {
     test("Then bill icon in vertical layout should be highlighted", async() => {
       const root = document.createElement("div");
@@ -50,7 +55,7 @@ describe("Given I am connected as an employee", () => {
       const handleBtnNewBill = jest.fn(() => billImpl.handleClickNewBill());
       btnNewBill.addEventListener("click", handleBtnNewBill);
       userEvent.click(btnNewBill);
-      // s'assurer que la fonction bien "handleBtnNewBill" était handleClickEye a été appelée
+      // s'assurer que la fonction "handleBtnNewBill" a été appelée
       expect(handleBtnNewBill).toHaveBeenCalled();
       // s'attendre à ce que le text "Envoyer une note de frais" soit vraie
       expect(screen.getByText("Envoyer une note de frais")).toBeTruthy();
@@ -69,11 +74,72 @@ describe("Given I am connected as an employee", () => {
       // simulation des interactions du navigateur
       userEvent.click(iconEye);
 
-      // s'assurer que la fonction "handleIconEye" bien était "handleIconEye" a été appelée
+      // s'assurer que la fonction "handleIconEye" a été appelée
       expect(handleIconEye).toHaveBeenCalled();
       // s'attendre à ce que la classe avec l'id modaleFile soit vraie
       expect(document.getElementById("modaleFile")).toBeTruthy();
     });
-
   });
+
+  // test d'intégration GET
+  describe("When I navigate to the bills", () => {
+
+    beforeEach(() => {
+      jest.spyOn(mockStore, "bills");
+      const root = document.createElement("div");
+      root.setAttribute("id", "root");
+      document.body.appendChild(root);
+      router();
+    });
+
+    test("get the bills from a mock API GET", async() => {
+      //  jest.spyOn(obj, 'functionName') instanciés pour simuler une fonction.
+      const spyInstance = jest.spyOn(mockStore, "bills");
+      const billList = await mockStore.bills().list();
+      // assurer que fonction simulée "spyInstance" a été appelée 1 fois
+      expect(spyInstance).toHaveBeenCalledTimes(1);
+      // vérifier que la longueur du tableau et égale a 4
+      expect(billList.length).toBe(4);
+    });
+
+    test("Get bills from API, fails with an error message 404", async() => {
+      document.body.innerHTML = BillsUI({error: "Erreur 404"});
+      const errorMessage = await screen.getByText(/Erreur 404/);
+      expect(errorMessage).toBeTruthy();
+    });
+
+    test("Get bills from API, fails with an error message 500", async() => {
+      document.body.innerHTML = BillsUI({error: "Erreur 500"});
+      const errorMessage = await screen.getByText(/Erreur 500/);
+      expect(errorMessage).toBeTruthy();
+    });
+  });
+
+
+  // TEST INTÉGRATION GET
+  //   test("get the bills from a mock API GET", async() => {
+  //     //  jest.spyOn(obj, 'functionName') instanciés pour simuler une fonction.
+  //     const spyInstance = jest.spyOn(mockStore, "bills");
+  //     const billList = await mockStore.bills().list();
+  //     // assurer que fonction simulée "spyInstance" a été appelée 1 fois
+  //     expect(spyInstance).toHaveBeenCalledTimes(1);
+  //     // vérifier que la longueur du tableau et égale a 4
+  //     expect(billList.length).toBe(4);
+  //   });
+  //
+  //   test("fetches messages from an API and fails with 500 message error", async() => {
+  //     mockStore.bills.mockImplementationOnce(() => {
+  //       return {
+  //         list: () => {
+  //           return Promise.reject(new Error("Erreur 500"));
+  //         }
+  //       };
+  //     });
+  //
+  //     window.onNavigate(ROUTES_PATH.Bills);
+  //     await new Promise(process.nextTick);
+  //     const message = await screen.getByText(/Erreur 404/);
+  //     expect(message).toBeTruthy();
+  //   });
+  // });
 });
