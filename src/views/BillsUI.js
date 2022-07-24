@@ -1,8 +1,8 @@
-import VerticalLayout from './VerticalLayout.js'
-import ErrorPage from "./ErrorPage.js"
-import LoadingPage from "./LoadingPage.js"
+import VerticalLayout from "./VerticalLayout.js";
+import ErrorPage from "./ErrorPage.js";
+import LoadingPage from "./LoadingPage.js";
 
-import Actions from './Actions.js'
+import Actions from "./Actions.js";
 
 const row = (bill) => {
   return (`
@@ -16,21 +16,20 @@ const row = (bill) => {
         ${Actions(bill.fileUrl)}
       </td>
     </tr>
-    `)
-}
+    `);
+};
 
 // trie de la date par ordre décroissant
 const rows = (data) => {
   if (data && data.length) {
-    console.log("data ==>", data)
     return data
       .sort((a, b) => (a.date < b.date) ? 1 : -1)
       .map((bill) => row(bill))
-      .join("")
+      .join("");
   } else {
-    return ""
+    return "";
   }
-}
+};
 
 export default ({data: bills, loading, error}) => {
 
@@ -49,12 +48,12 @@ export default ({data: bills, loading, error}) => {
         </div>
       </div>
     </div>
-  `)
+  `);
 
   if (loading) {
-    return LoadingPage()
+    return LoadingPage();
   } else if (error) {
-    return ErrorPage(error)
+    return ErrorPage(error);
   }
 
   return (`
@@ -85,5 +84,5 @@ export default ({data: bills, loading, error}) => {
       </div>
       ${modal()}
     </div>`
-  )
+  );
 }
