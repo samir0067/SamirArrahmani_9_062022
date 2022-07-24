@@ -14,8 +14,7 @@ import mockStore from "../__mocks__/store.js";
 describe("Given I am connected as an employee", () => {
 
   beforeEach(() => {
-    // beforeEach() est exécuté avant chaque test describe avec window.localStorage qui permet d'accéder aux données
-    // stockées des sessions du navigateur sans date d'expiration.
+    // Permet d'accéder aux données stockées des sessions du navigateur sans date d'expiration.
     Object.defineProperty(window, "localStorage", {value: localStorageMock});
     window.localStorage.setItem("user", JSON.stringify({type: "Employee"}));
   });
@@ -81,7 +80,7 @@ describe("Given I am connected as an employee", () => {
     });
   });
 
-  // test d'intégration GET
+  // TEST INTÉGRATION GET
   describe("When I navigate to the bills", () => {
 
     beforeEach(() => {
@@ -114,32 +113,4 @@ describe("Given I am connected as an employee", () => {
       expect(errorMessage).toBeTruthy();
     });
   });
-
-
-  // TEST INTÉGRATION GET
-  //   test("get the bills from a mock API GET", async() => {
-  //     //  jest.spyOn(obj, 'functionName') instanciés pour simuler une fonction.
-  //     const spyInstance = jest.spyOn(mockStore, "bills");
-  //     const billList = await mockStore.bills().list();
-  //     // assurer que fonction simulée "spyInstance" a été appelée 1 fois
-  //     expect(spyInstance).toHaveBeenCalledTimes(1);
-  //     // vérifier que la longueur du tableau et égale a 4
-  //     expect(billList.length).toBe(4);
-  //   });
-  //
-  //   test("fetches messages from an API and fails with 500 message error", async() => {
-  //     mockStore.bills.mockImplementationOnce(() => {
-  //       return {
-  //         list: () => {
-  //           return Promise.reject(new Error("Erreur 500"));
-  //         }
-  //       };
-  //     });
-  //
-  //     window.onNavigate(ROUTES_PATH.Bills);
-  //     await new Promise(process.nextTick);
-  //     const message = await screen.getByText(/Erreur 404/);
-  //     expect(message).toBeTruthy();
-  //   });
-  // });
 });
