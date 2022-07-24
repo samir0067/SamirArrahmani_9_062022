@@ -9,6 +9,9 @@ import userEvent from "@testing-library/user-event";
 import {ROUTES} from "../constants/routes.js";
 import mockStore from "../__mocks__/store";
 
+jest.mock("../app/store", () => mockStore)
+window.alert = jest.fn();
+
 describe("Given I am connected as an employee", () => {
 
   beforeEach(() => {
