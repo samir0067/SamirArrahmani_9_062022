@@ -6,10 +6,11 @@ import {localStorageMock} from "../__mocks__/localStorage.js";
 import NewBill from "../containers/NewBill.js";
 import {fireEvent, screen} from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
-import {ROUTES} from "../constants/routes.js";
+import {ROUTES, ROUTES_PATH} from "../constants/routes.js";
 import mockStore from "../__mocks__/store";
+import router from "../app/Router.js";
 
-jest.mock("../app/store", () => mockStore)
+jest.mock("../app/store", () => mockStore);
 window.alert = jest.fn();
 
 describe("Given I am connected as an employee", () => {
@@ -68,6 +69,46 @@ describe("Given I am connected as an employee", () => {
       await new Promise(process.nextTick);
       expect(screen.getByText("Mes notes de frais")).toBeTruthy();
       expect(screen.getByTestId("tbody")).toBeTruthy();
+    });
+  });
+
+  // TEST D'INTÉGRATION POST
+  describe("When I navigate to the bills", () => {
+
+    //  Récupère les nouvelles factures à partir de l'API mocker.
+    beforeEach(() => {
+      jest.spyOn(mockStore, "bills");
+      const root = document.createElement("div");
+      root.setAttribute("id", "root");
+      document.body.appendChild(root);
+      router();
+    });
+
+    test("Get bills from API, fails with an error message 404", async() => {
+      mockStore.bills.mockImplementationOnce(() => {
+        return {
+          list: () => {
+            return (Promise.reject(new Error("Erreur 404")));
+          }
+        };
+      });
+      window.onNavigate(ROUTES_PATH["Bills"]);
+      await new Promise(process.nextTick);
+      expect(await screen.getByText(/Erreur 404/)).toBeTruthy();
+    });
+
+    test("Get message from API, fails with an error message 500", async() => {
+      mockStore.bills.mockImplementationOnce(() => {
+        return {
+          list: () => {
+            return Promise.reject(new Error("Erreur 500"));
+          }
+        };
+      });
+
+      window.onNavigate(ROUTES_PATH["Bills"]);
+      await new Promise(process.nextTick);
+      expect(await screen.getByText(/Erreur 500/)).toBeTruthy();
     });
   });
 });

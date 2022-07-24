@@ -83,6 +83,7 @@ describe("Given I am connected as an employee", () => {
   // TEST INTÉGRATION GET
   describe("When I navigate to the bills", () => {
 
+    //  Récupère les factures à partir de l'API mocker.
     beforeEach(() => {
       jest.spyOn(mockStore, "bills");
       const root = document.createElement("div");
@@ -103,14 +104,12 @@ describe("Given I am connected as an employee", () => {
 
     test("Get bills from API, fails with an error message 404", async() => {
       document.body.innerHTML = BillsUI({error: "Erreur 404"});
-      const errorMessage = await screen.getByText(/Erreur 404/);
-      expect(errorMessage).toBeTruthy();
+      expect(await screen.getByText(/Erreur 404/)).toBeTruthy();
     });
 
     test("Get bills from API, fails with an error message 500", async() => {
       document.body.innerHTML = BillsUI({error: "Erreur 500"});
-      const errorMessage = await screen.getByText(/Erreur 500/);
-      expect(errorMessage).toBeTruthy();
+      expect(await screen.getByText(/Erreur 500/)).toBeTruthy();
     });
   });
 });
