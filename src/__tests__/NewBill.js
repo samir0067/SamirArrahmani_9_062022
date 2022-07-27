@@ -92,7 +92,7 @@ describe("Given I am connected as an employee", () => {
           }
         };
       });
-      window.onNavigate(ROUTES_PATH["Bills"]);
+      window.onNavigate(ROUTES_PATH.Bills);
       await new Promise(process.nextTick);
       expect(await screen.getByText(/Erreur 404/)).toBeTruthy();
     });
@@ -106,7 +106,7 @@ describe("Given I am connected as an employee", () => {
         };
       });
 
-      window.onNavigate(ROUTES_PATH["Bills"]);
+      window.onNavigate(ROUTES_PATH.Bills);
       await new Promise(process.nextTick);
       expect(await screen.getByText(/Erreur 500/)).toBeTruthy();
     });
