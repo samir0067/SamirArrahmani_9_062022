@@ -31,7 +31,6 @@ describe("Given I am connected as an employee", () => {
   describe("When I complete the required fields and click on Submit", () => {
     test("Then I am redirected to the page of the bill, is it and submitted", async() => {
       const newBillFile = new File(["img"], "newBill.png", {type: "image/png"});
-      console.log("newBillFile===", newBillFile.name);
       const onNavigate = (pathname) => {
         document.body.innerHTML = ROUTES({pathname});
       };
